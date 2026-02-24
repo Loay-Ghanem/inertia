@@ -1,13 +1,8 @@
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from '@/components/ui/carousel';
+
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import Banner from '@/types/banner';
 import {
     Search,
     ShoppingBag,
@@ -18,6 +13,7 @@ import {
     Watch,
     Smartphone,
 } from 'lucide-react';
+import HeroBanner from '@/components/ui/hero-banner';
 
 const categories = [
     { name: 'Electronics', icon: Smartphone, color: 'bg-blue-500' },
@@ -30,66 +26,10 @@ const categories = [
     { name: 'Accessories', icon: ShoppingBag, color: 'bg-rose-500' },
 ];
 
-const slides = [
-    {
-        title: 'Flash Sale: 50% Off',
-        subtitle: 'Selected categories',
-        description: 'Limited time offers on premium products',
-        gradient: 'from-slate-900 via-slate-800 to-slate-900',
-        badge: 'ENDS SOON',
-    },
-    {
-        title: 'New Arrivals',
-        subtitle: 'This Week',
-        description: 'Discover the latest trends in fashion and tech',
-        gradient: 'from-blue-900 via-blue-800 to-indigo-900',
-        badge: 'NEW',
-    },
-    {
-        title: 'Free Shipping',
-        subtitle: 'On Orders Over $50',
-        description: 'Fast delivery to your doorstep',
-        gradient: 'from-emerald-900 via-emerald-800 to-teal-900',
-        badge: 'FREE',
-    },
-];
-
-export default function HomePage() {
+export default function HomePage({ banners }: { banners: Banner[] }) {
     return (
         <div className="flex flex-col gap-16 pb-10">
-            {/* Hero Carousel */}
-            <section className="relative w-full">
-                <Carousel opts={{ loop: true }} className="w-full">
-                    <CarouselContent>
-                        {slides.map((slide, index) => (
-                            <CarouselItem key={index}>
-                                <div
-                                    className={`relative h-[320px] bg-gradient-to-r md:h-[420px] ${slide.gradient} flex items-center justify-center`}
-                                >
-                                    <div className="absolute inset-0 bg-black/20" />
-                                    <div className="relative z-10 max-w-2xl px-6 text-center text-white">
-                                        <Badge className="mb-4 border-0 bg-white/20 font-medium text-white backdrop-blur-sm hover:bg-white/30">
-                                            {slide.badge}
-                                        </Badge>
-                                        <h1 className="mb-3 text-4xl font-bold tracking-tight md:text-6xl">
-                                            {slide.title}
-                                        </h1>
-                                        <p className="mb-4 text-xl font-light opacity-90 md:text-2xl">
-                                            {slide.subtitle}
-                                        </p>
-                                        <p className="text-sm opacity-75 md:text-base">
-                                            {slide.description}
-                                        </p>
-                                    </div>
-                                </div>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className="absolute top-1/2 left-4 h-10 w-10 -translate-y-1/2 border-0 bg-white/20 text-white backdrop-blur-sm hover:bg-white/30" />
-                    <CarouselNext className="absolute top-1/2 right-4 h-10 w-10 -translate-y-1/2 border-0 bg-white/20 text-white backdrop-blur-sm hover:bg-white/30" />
-                </Carousel>
-            </section>
-
+           <HeroBanner  banners={banners} />
             <div className="container mx-auto space-y-16 px-4">
                 {/* Search Bar */}
                 <div className="relative mx-auto max-w-2xl">
