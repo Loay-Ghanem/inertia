@@ -55,11 +55,11 @@ class User extends Authenticatable implements FilamentUser
     public function isAdmin (?User $user = null): bool
     {
         $user = $user ?? Auth::user();
-        return $user && $user->user_type === UserType::ADMIN;
+        return $user && $user->user_type == UserType::ADMIN;
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->isAdmin();
+        return $this->isAdmin($this);
     }
 }
