@@ -4,16 +4,20 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import '../css/app.css';
 import { initializeTheme } from './hooks/use-appearance';
+import DefaultLayout from './layouts/default-layout';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
-    resolve: (name) =>
-        resolvePageComponent(
-            `./pages/${name}.tsx`,
-            import.meta.glob('./pages/**/*.tsx'),
-        ),
+    resolve: (name) => {
+        const pages = import.meta.glob('./pages/**/*.tsx', { eager: true });
+        let page = pages[`./pages/${name}.tsx`] as any;
+        page.default.layout =
+            page.default.layout ||
+            ((page: any) => <DefaultLayout>{page}</DefaultLayout>);
+        return page;
+    },
     setup({ el, App, props }) {
         const root = createRoot(el);
 
@@ -28,5 +32,4 @@ createInertiaApp({
     },
 });
 
-// This will set light / dark mode on load...
 initializeTheme();
