@@ -14,6 +14,25 @@ export default function HeroBanner({ banners,  }: { banners: Banner[] }) {
         Autoplay({ delay: 2000, stopOnInteraction: true })
     );
 
+    const showArrows = banners.length > 2;
+
+    if (banners.length === 0) {
+        return (
+            <section className="relative w-full">
+                <div className="relative h-[400px] w-full overflow-hidden md:h-[550px]">
+                    <div className="absolute inset-0 z-0">
+                        <img
+                            src="https://placehold.co/1920x550/1a1a2e/ffffff?text=Welcome+to+Our+Website"
+                            alt="Default Banner"
+                            className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
     return (
         <section className="relative w-full">
             <Carousel
@@ -63,8 +82,12 @@ export default function HeroBanner({ banners,  }: { banners: Banner[] }) {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="absolute left-4 top-1/2 h-10 w-10 -translate-y-1/2 border-0 bg-white/20 text-white backdrop-blur-sm transition-opacity hover:bg-white/30 md:flex" />
-                <CarouselNext className="absolute right-4 top-1/2 h-10 w-10 -translate-y-1/2 border-0 bg-white/20 text-white backdrop-blur-sm transition-opacity hover:bg-white/30 md:flex" />
+                {showArrows && (
+                    <>
+                        <CarouselPrevious className="absolute left-4 top-1/2 h-10 w-10 -translate-y-1/2 border-0 bg-white/20 text-white backdrop-blur-sm transition-opacity hover:bg-white/30 md:flex" />
+                        <CarouselNext className="absolute right-4 top-1/2 h-10 w-10 -translate-y-1/2 border-0 bg-white/20 text-white backdrop-blur-sm transition-opacity hover:bg-white/30 md:flex" />
+                    </>
+                )}
             </Carousel>
         </section>
     );
