@@ -15,4 +15,14 @@ class Category extends Model
     protected $casts     = [
         'title' => 'array'
     ];
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
 }
