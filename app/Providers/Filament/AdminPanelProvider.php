@@ -9,7 +9,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -29,7 +28,19 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => [
+                    '50' => 'oklch(0.985 0 0)',
+                    '100' => 'oklch(0.95 0 0)',
+                    '200' => 'oklch(0.91 0 0)',
+                    '300' => 'oklch(0.85 0 0)',
+                    '400' => 'oklch(0.7 0 0)',
+                    '500' => 'oklch(0.55 0 0)',
+                    '600' => 'oklch(0.4 0 0)',
+                    '700' => 'oklch(0.3 0 0)',
+                    '800' => 'oklch(0.205 0 0)',
+                    '900' => 'oklch(0.145 0 0)',
+                    '950' => 'oklch(0.085 0 0)',
+                ],
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
