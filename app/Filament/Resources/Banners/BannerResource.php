@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Banners;
 
+use App\Concerns\HasTranslator;
 use App\Filament\Resources\Banners\Pages\CreateBanner;
 use App\Filament\Resources\Banners\Pages\EditBanner;
 use App\Filament\Resources\Banners\Pages\ListBanners;
@@ -13,17 +14,35 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use UnitEnum;
 
 class BannerResource extends Resource
 {
+    use HasTranslator;
+
     protected static ?string $model = Banner::class;
-    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-view-columns';
-    protected static ?string $recordTitleAttribute = 'Banner';
-    protected static UnitEnum|string|null $navigationGroup = 'Content Management';
-    protected static ?string $navigationLabel = 'Banners';
-    protected static ?string $pluralLabel = 'Banners';
-    protected static ?string $label = 'Banner';
+    protected static string $translationDirectoryName       = 'filament';
+    protected static string $translationFileName            = 'banner';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::QueueList;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return self::translate('content_management');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return self::translate('Banners');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return self::translate('Banner');
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return self::translate('Banners');
+    }
 
     public static function form(Schema $schema): Schema
     {

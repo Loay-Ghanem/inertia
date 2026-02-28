@@ -32,10 +32,12 @@ class SubCategoriesTable
                     ->label(self::translate('slug'))
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label(self::translate('created_at', true))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(self::translate('updated_at', true))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

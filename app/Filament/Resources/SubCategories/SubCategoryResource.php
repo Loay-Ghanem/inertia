@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class SubCategoryResource extends Resource
 {
-     use HasTranslator;
+    use HasTranslator;
 
     protected static ?string $model                         = Category::class;
     protected static string|BackedEnum|null $navigationIcon = Heroicon::QueueList;
